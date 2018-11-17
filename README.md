@@ -3,7 +3,7 @@
 
 ## Setup Instructions:
 
-# Step-1: Download , Install and Run Elastic-Search 6.0.0
+# Step-1: Download , Install and Run Elastic-Search 6.4.3
 
 This section includes information on how to setup Elasticsearch and get it running, including:
 
@@ -32,22 +32,52 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html
 
 
 Mac OSX:
-```
-1. open terminal
 
-2. Run command:
+# Install va homebrew
 
-    brew install elastic
+If you don't have homebrew installed -  [get homebrew here](http://brew.sh/)
 
-3.
+Then run:  `brew install elasticsearch`
 
-4.
+# Configuration
 
-5.
+Update the elasticsearch configuration file in ` /usr/local/etc/elasticsearch/elasticsearch.yml`.
 
-6.
+Set the value below to false:
 
-```
+    discovery.zen.ping.multicast.enabled: false #(it's true by default)
+
+# How to start it
+
+Other sources say to use a removed `brew services` command. You get it via `brew tap gapple/services`. Then you're supposed to run `brew services start <package-to-start>`.
+
+If brew `services start elasticsearch` doesn't work for you, check the instructions when you run `brew info elasticsearch`.
+
+Mine says:
+
+==> Downloading https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-6.4.3.tar.gz
+######################################################################## 100.0%
+==> /usr/local/Cellar/elasticsearch/6.4.3/bin/elasticsearch-keystore create
+==> Caveats
+Data:    /usr/local/var/lib/elasticsearch/elasticsearch_lakshmikanth/
+Logs:    /usr/local/var/log/elasticsearch/elasticsearch_lakshmikanth.log
+Plugins: /usr/local/var/elasticsearch/plugins/
+Config:  /usr/local/etc/elasticsearch/
+
+To have launchd start elasticsearch now and restart at login:
+  brew services start elasticsearch
+Or, if you don't want/need a background service you can just run:
+  elasticsearch
+==> Summary
+🍺  /usr/local/Cellar/elasticsearch/6.4.3: 118 files, 36MB, built in 22 seconds
+
+# Sources
+
+- [Quick Elasticsearch / Kibana / Logstash (ELK stack) Install (for your local mac dev box) - gist.github.com](https://gist.github.com/squarism/8fa9cdd7d6b36c9fcb45)
+- [Important Configuration Changes - www.elastic.co](https://www.elastic.co/guide/en/elasticsearch/guide/current/_important_configuration_changes.html#_prefer_unicast_over_multicast)
+
+
+
 Windows:
 ```
 - The zip and tar.gz packages are suitable for installation on any system and are the easiest choice for getting started with Elasticsearch on most systems.
@@ -60,18 +90,9 @@ Windows:
 Linux:
 ```
 
-- The deb package is suitable for Debian, Ubuntu, and other Debian-based systems. Debian packages may be downloaded from the Elasticsearch website or from our Debian repository.
+1. apt-get update
 
-- Install Elasticsearch with Debian Package
-
-- https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html
-
-
-- The rpm package is suitable for installation on Red Hat, Centos, SLES, OpenSuSE and other RPM-based systems. RPMs may be downloaded from the Elasticsearch website or from our RPM repository.
-
-- Install Elasticsearch with RPM:
-
-- https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html
+2. apt-get install -y elasticsearch
 
 ```
 
@@ -104,9 +125,33 @@ The startup scripts provided in the RPM and Debian packages take care of startin
 
 # Step-2: Setup and Run ElasticDataLoader Project:
 
-```
-Clone Git Project:
-```
+
+- Clone Git Project: git@github.com:kanthgithub/ElasticDataLoader.git
+
+- Git Project page: https://github.com/kanthgithub/ElasticDataLoader
+
+- Build:
+
+    - Navigate to project directory
+
+    - build project by command:
+
+      $ mvn clean install
+
+
+- Configuration:
+
+    - configure the file directory at which you want to place log files for storage
+
+    - update the directory/path in application.yaml file under src/main/resources of project
+
+
+- After Configuration & Successful Build, Start the ElasticDataLoader-Service:
+
+     $ mvn spring-boot run
+
+
+
 
 
 
