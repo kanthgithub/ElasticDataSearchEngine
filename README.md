@@ -99,7 +99,6 @@ Linux:
 
 # Running Elasticsearch from the command line:
 
-```
 1. Elasticsearch can be started from the command line as follows:
 
 ./bin/elasticsearch
@@ -120,11 +119,8 @@ kill `cat pid`
 
 Note:
 The startup scripts provided in the RPM and Debian packages take care of starting and stopping the Elasticsearch process for you.
-```
-
 
 # Step-2: Setup and Run ElasticDataLoader Project:
-
 
 - Clone Git Project: git@github.com:kanthgithub/ElasticDataLoader.git
 
@@ -138,28 +134,44 @@ The startup scripts provided in the RPM and Debian packages take care of startin
 
       $ mvn clean install
 
-
 - Configuration:
 
     - configure the file directory at which you want to place log files for storage
 
     - update the directory/path in application.yaml file under src/main/resources of project
 
+    - Server port is choosen as 0 in application.yaml under directory: src/main/resources
+
+        - Please hange the port -> if you want to run application on a specific port
+        - Alternatively you can look at the startup logs for the port the application has started-up
 
 - After Configuration & Successful Build, Start the ElasticDataLoader-Service:
 
-     $ mvn spring-boot run
-
-
-
-
-
-
-
-
+     $ mvn spring-boot:run
 
 # Step3: Setup and Run ElasticDataQuery Project:
 
-```
-Clone Git Project:
-```
+- Clone Git Project:  (git@github.com:kanthgithub/ElasticDataQuery.git)
+
+- Git Project Details: (https://github.com/kanthgithub/ElasticDataQuery)
+
+- Build:
+
+    - Navigate to project directory
+
+    - build project by command:
+
+        $ mvn clean install
+
+- Configuration:
+
+    - Server port is choosen as 0 in application.yaml under directory: src/main/resources
+
+        - Please hange the port -> if you want to run application on a specific port
+        - Alternatively you can look at the startup logs for the port the application has started-up
+
+- After Configuration & Successful Build, Start the ElasticDataLoader-Service:
+
+     $ mvn spring-boot:run
+
+For further details on REST-API endpoints and details, please refer the Github project Details under project link mentioned above.
